@@ -1,6 +1,5 @@
-import { Text, TextInput } from "react-native";
+import { Text, TextInput, Pressable } from "react-native";
 import { styles } from "../styles";
-import { ButtonAddParticipante } from "./ButtonAddParticipante";
 import "./inputParticipante.css";
 
 export function InputParticipante() {
@@ -18,7 +17,11 @@ export function InputParticipante() {
           inputMode="text"
         />
         <div className="button-hover">
-        <ButtonAddParticipante />
+          <Pressable style={styles.buttonAdd} key="buttonAdd">
+            <Text style={styles.textButton}>
+              <span>+</span>
+            </Text>
+          </Pressable>
         </div>
       </div>
     </>
