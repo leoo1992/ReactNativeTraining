@@ -1,14 +1,20 @@
-import { Text, TextInput, Pressable } from "react-native";
-import { styles } from "../styles";
-import "./inputParticipante.css";
+import { Text, TextInput, Pressable, View } from "react-native";
+import { styles } from "./styles";
+import "./ParticipanteInput.css";
 
-export function InputParticipante() {
+type Props = {
+  onAdd: () => void;
+};
+
+export function InputParticipante({onAdd}: Props) {
+
   return (
     <>
       <Text key="TextParticipante" style={styles.textTitle}>
         Nome do Participante:
       </Text>
-      <div className="divInputButton">
+
+      <View style={styles.formParticipante}>
         <TextInput
           key="inputParticipante"
           style={styles.inputParticipante}
@@ -17,13 +23,17 @@ export function InputParticipante() {
           inputMode="text"
         />
         <div className="button-hover">
-          <Pressable style={styles.buttonAdd} key="buttonAdd">
+          <Pressable
+            key="buttonAdd"
+            onPress={onAdd}
+            style={styles.buttonAdd}
+          >
             <Text style={styles.textButton}>
               <span>+</span>
             </Text>
           </Pressable>
         </div>
-      </div>
+      </View>
     </>
   );
 }

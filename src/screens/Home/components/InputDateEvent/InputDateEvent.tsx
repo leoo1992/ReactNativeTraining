@@ -1,5 +1,5 @@
 import { Text, TextInput } from "react-native";
-import { styles } from "../styles";
+import { styles } from "../../styles";
 
 export function InputDateEvent() {
   const formatDate = (date: string | number | Date) => {
