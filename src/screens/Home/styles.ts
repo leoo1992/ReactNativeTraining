@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     color: "#f0f8ff",
     padding: 15,
-    fontSize: 16,
+    fontSize: 14,
     borderWidth: 1, 
     borderColor: "#9999", 
   },
@@ -53,6 +53,12 @@ export const styles = StyleSheet.create({
     height: "100%",
     padding: 20,
     borderRadius: 10
+  },
+
+  buttonGroup: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   }
 
 });

@@ -4,6 +4,8 @@ import { InputNameEvent } from "./components/InputNameEvent/InputNameEvent";
 import { InputDateEvent } from "./components/InputDateEvent/InputDateEvent";
 import { InputParticipante } from "./components/Participant/Input/InputParticipante";
 import { Participante } from "./components/Participant/Lista/Participante";
+import { SubmitButton } from "./components/SubmitButton/SubmitButton";
+import { Social } from "./components/Icons/Social";
 
 export function Home() {
   const participantes: string[] = ["Diego", "Ciclano", "Fulano"];
@@ -12,31 +14,28 @@ export function Home() {
     if (participantes.includes("Leonardo")) {
       return Alert.alert(
         "Participante existente",
-        "Já existe p articipantecom o nome." 
+        "Já existe p articipantecom o nome."
       );
-    };
+    }
 
-    Alert.alert(
-      "Adicionado",
-      "Participante adicionado a lista de presença"
-    );
+    Alert.alert("Adicionado", "Participante adicionado a lista de presença");
   }
 
   function handleRemoveParticipante(name: string) {
-    Alert.alert(
-      "Remover ", 
-      "Remover o participante " + name + "?",
-      [
-        {
-          text: "Sim",
-          onPress:()=> Alert.alert("Removido", "Participante " + name + " removido da lista de presença"),
-        },
-        {
-          text: "Não",
-          style: "cancel",
-        }
-      ]
-      );
+    Alert.alert("Remover ", "Remover o participante " + name + "?", [
+      {
+        text: "Sim",
+        onPress: () =>
+          Alert.alert(
+            "Removido",
+            "Participante " + name + " removido da lista de presença"
+          ),
+      },
+      {
+        text: "Não",
+        style: "cancel",
+      },
+    ]);
   }
 
   return (
@@ -68,6 +67,10 @@ export function Home() {
           />
         )}
       />
+      <View style={styles.buttonGroup}>
+        <SubmitButton />
+        <Social />
+      </View>
     </View>
   );
 }
