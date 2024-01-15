@@ -1,5 +1,5 @@
 import { Text, TextInput } from "react-native";
-import { styles } from "../../styles";
+import { styles, theme } from "./styles";
 
 export function InputDateEvent() {
   const formatDate = (date: string | number | Date) => {
@@ -22,8 +22,8 @@ export function InputDateEvent() {
       <TextInput
         key="InputDate"
         style={styles.input}
-        placeholderTextColor="#6B6B6B"
-        keyboardAppearance="dark"
+        placeholderTextColor={styles.placeholderTextColorStyles.color}
+        keyboardAppearance={theme}
         defaultValue={currentDate}
       />
     </>

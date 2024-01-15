@@ -1,5 +1,5 @@
 import { Text, TextInput } from "react-native";
-import { styles } from "../../styles";
+import { styles, theme } from "./styles";
 
 export function InputNameEvent() {
   return (
@@ -10,10 +10,13 @@ export function InputNameEvent() {
       <TextInput
         key="inputParticipante"
         style={styles.input}
-        placeholderTextColor="#6B6B6B"
-        keyboardAppearance="dark"
+        placeholderTextColor={styles.placeholderTextColorStyles.color}
+        keyboardAppearance={theme}
         inputMode="text"
       />
     </>
   );
 }
+
+
+

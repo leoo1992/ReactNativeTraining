@@ -1,6 +1,6 @@
-import { View, Text, Pressable } from "react-native";
-import { styles } from "./styles";
-import "./Participante.css";
+import { View, Text, TouchableOpacity } from "react-native";
+import { styles, iconStyles } from "./styles";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 type Props = {
   name: string;
@@ -8,22 +8,18 @@ type Props = {
 };
 
 export function Participante({ name, onRemove }: Props) {
-
-
   return (
     <View style={styles.containerLista}>
       <Text style={styles.nameParticipante}>{name}</Text>
-      <div className="button-hover">
-        <Pressable
+      <View>
+        <TouchableOpacity
           key="buttonAdd"
           onPress={onRemove}
           style={styles.buttonRemove}
         >
-          <Text style={styles.textButton}>
-            <span>-</span>
-          </Text>
-        </Pressable>
-      </div>
+          <Icon name="trash-o" {...iconStyles} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

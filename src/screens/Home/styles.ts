@@ -4,30 +4,13 @@ export const styles = StyleSheet.create({
   containerApp: {
     flex: 1,
     backgroundColor: "#212529",
-    padding: 20
+    paddingTop: 5,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingBottom: 5
   },
 
-  textTitle: {
-    color: "#dee2e6",
-    fontSize: 18,
-    marginTop: 15,
-    marginLeft: 5
-  },
-  
-
-  input: {
-    marginTop: 5,
-    backgroundColor: "#1f1e25",
-    height: 50,
-    borderRadius: 10,
-    color: "#f0f8ff",
-    padding: 15,
-    fontSize: 14,
-    borderWidth: 1, 
-    borderColor: "#9999", 
-  },
-
-  textEmptyList: {
+   textEmptyList: {
     flex: 1,
     color: "#f0f8ff",
     textAlign: "center",
@@ -59,6 +42,22 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: 10,
+    paddingBottom: 0,
+    margin: 0
+  },
+
+  textDialog: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+
+  dialogTheme: {
+    backgroundColor: "#333",
+    background: "#333",
+    padding: 10,
+    margin: 0,
+    borderWidth: 0
   }
 
 });

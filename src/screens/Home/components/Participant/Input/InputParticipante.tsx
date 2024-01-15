@@ -1,13 +1,12 @@
-import { Text, TextInput, Pressable, View } from "react-native";
-import { styles } from "./styles";
-import "./ParticipanteInput.css";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { styles, iconStyles } from "./styles";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 type Props = {
   onAdd: () => void;
 };
 
-export function InputParticipante({onAdd}: Props) {
-
+export function InputParticipante({ onAdd }: Props) {
   return (
     <>
       <Text key="TextParticipante" style={styles.textTitle}>
@@ -22,17 +21,15 @@ export function InputParticipante({onAdd}: Props) {
           keyboardAppearance="dark"
           inputMode="text"
         />
-        <div className="button-hover">
-          <Pressable
+        <View>
+          <TouchableOpacity
             key="buttonAdd"
             onPress={onAdd}
             style={styles.buttonAdd}
           >
-            <Text style={styles.textButton}>
-              <span>+</span>
-            </Text>
-          </Pressable>
-        </div>
+          <Icon name="plus" {...iconStyles}/>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );

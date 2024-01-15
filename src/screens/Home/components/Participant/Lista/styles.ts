@@ -44,7 +44,17 @@ export const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 35,
         fontWeight: "bold",
-        marginBottom: 10
+        marginBottom: 0,
+        marginTop: 0,
+        padding: 0
       },
 
 });
+
+
+export const iconStyles = {
+    size: 30,
+    color: "#fff",
+  };
+
+

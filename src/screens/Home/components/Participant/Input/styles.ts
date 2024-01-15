@@ -57,3 +57,8 @@ export const styles = StyleSheet.create({
   }
 
 });
+
+export const iconStyles = {
+  size: 25,
+  color: "#fff",
+};

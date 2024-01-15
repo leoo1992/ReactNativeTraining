@@ -1,21 +1,15 @@
 import { Button } from "@rneui/base";
+import { styles } from "./styles";
 
 export function SubmitButton() {
   return (
     <Button
       title="Enviar"
       iconRight
-      iconContainerStyle={{ marginLeft: 10 }}
-      titleStyle={{ fontWeight: "700" }}
-      buttonStyle={{
-        backgroundColor: "#50Cf69",
-        borderColor: "#fff",
-        borderWidth: 2,
-        borderRadius: 30,
-      }}
-      containerStyle={{
-        flex: 1,
-      }}
+      iconContainerStyle={styles.iconContainer}
+      titleStyle={styles.title}
+      buttonStyle={styles.button}
+      containerStyle={styles.container}
     />
   );
 }
