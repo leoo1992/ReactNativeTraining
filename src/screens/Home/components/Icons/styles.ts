@@ -8,14 +8,14 @@ export const styles = StyleSheet.create({
         height: 40,
         padding: 5,
         marginLeft: 5,
-    
         justifyContent: "center",
         alignItems: "center",
       },
     
       buttonGitHub: {
         margin:0,
-        padding:0
+        padding:0,
+        marginBottom: 5
       }
 });
 

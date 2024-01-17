@@ -1,15 +1,12 @@
-import { Button } from "@rneui/base";
+import { Pressable, Text, View } from "react-native";
 import { styles } from "./styles";
 
 export function SubmitButton() {
   return (
-    <Button
-      title="Enviar"
-      iconRight
-      iconContainerStyle={styles.iconContainer}
-      titleStyle={styles.title}
-      buttonStyle={styles.button}
-      containerStyle={styles.container}
-    />
+    <Pressable style={styles.container} accessible={true} role="button">
+      <View style={styles.button}>
+        <Text style={styles.title}>Enviar</Text>
+      </View>
+    </Pressable>
   );
 }

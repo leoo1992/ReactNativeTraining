@@ -1,8 +1,8 @@
 import React from "react";
 import { styles, iconStyles } from "./styles";
-import { View, TouchableOpacity, Linking } from "react-native";
+import { View, Pressable, Linking } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export function Social() {
   const handleGithubPress = () => {
@@ -11,10 +11,15 @@ export function Social() {
   };
 
   return (
-    <TouchableOpacity onPress={handleGithubPress} style={styles.buttonGitHub}>
+    <Pressable
+      onPress={handleGithubPress}
+      style={styles.buttonGitHub}
+      accessible={true}
+      role="button"
+    >
       <View style={styles.buttonContainer}>
-        <FontAwesomeIcon icon={faGithub} {...iconStyles} />
+      <Icon name="github" {...iconStyles} />
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 }

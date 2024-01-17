@@ -7,10 +7,10 @@ export const styles = StyleSheet.create({
     paddingTop: 5,
     paddingLeft: 15,
     paddingRight: 15,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
 
-   textEmptyList: {
+  textEmptyList: {
     flex: 1,
     color: "#f0f8ff",
     textAlign: "center",
@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     padding: 20,
-    borderRadius: 10
+    borderRadius: 10,
   },
 
   buttonGroup: {
@@ -44,20 +44,70 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 10,
     paddingBottom: 0,
-    margin: 0
+    margin: 0,
   },
 
   textDialog: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
+    color: "#f0f8ff",
+    textAlign: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
   },
 
-  dialogTheme: {
-    backgroundColor: "#333",
-    background: "#333",
+  dialogButtonsGroup: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 25,
     padding: 10,
-    margin: 0,
-    borderWidth: 0
-  }
+  },
 
+  dialogButtonText: {
+    color: "#f0f8ff",
+    fontWeight: "bold",
+    textAlign: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+
+  dialogButtonSim: {
+    flex: 0.5,
+    backgroundColor: "#E23C44",
+    borderRadius: 10,
+    padding: 5,
+    marginRight: 10,
+    color: "#fff",
+    height: 30,
+    textAlign: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+
+  dialogButtonNão: {
+    flex: 0.5,
+    backgroundColor: "#50Cf69",
+    borderRadius: 10,
+    padding: 5,
+    color: "#fff",
+    height: 30,
+    textAlign: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+
+  flatList: {
+    backgroundColor: "#292929",
+    padding: 5,
+  }
 });

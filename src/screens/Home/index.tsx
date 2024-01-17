@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { styles } from "./styles";
-import { View, FlatList, Text, Alert } from "react-native";
+import { View, FlatList, Text, Pressable } from "react-native";
 import { InputNameEvent } from "./components/InputNameEvent/InputNameEvent";
 import { InputDateEvent } from "./components/InputDateEvent/InputDateEvent";
 import { InputParticipante } from "./components/Participant/Input/InputParticipante";
@@ -14,6 +14,7 @@ export function Home() {
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
   const [visible4, setVisible4] = useState(false);
+  const [participantes, setParticipantes] = useState(["Leonardo"]);
 
   const toggleDialog1 = () => {
     setVisible1(!visible1);
@@ -30,16 +31,13 @@ export function Home() {
     setVisible4(!visible4);
   };
 
-  const participantes: string[] = ["Diego"];
-
-  function handleAddParticipante() {
-    if (participantes.includes("Leonardo")) {
-      toggleDialog1();
+   function handleAddParticipante() {
+    if (participantes.includes("Leo")) {
+      return toggleDialog1();
     }
 
-    participantes.push("Leonardo");
+    setParticipantes(prevState => [...prevState,'José'])
     toggleDialog2();
-    console.log(participantes);
   }
 
   function handleRemoveParticipante(name: string) {
@@ -50,56 +48,93 @@ export function Home() {
     <View key="App" style={styles.containerApp}>
       <>
         <Dialog
+          style={{ pointerEvents: visible1 ? "auto" : "none" }}
           isVisible={visible1}
           onBackdropPress={toggleDialog1}
-          animationType="fade"
+          key={Math.random()}
+          pointerEvents={visible1 ? "auto" : "none"}
+          role="dialog"
         >
-          <View style={styles.dialogTheme}></View>
-          <Dialog.Title title="Participante existente" />
           <Text style={styles.textDialog}>
-            Já existe p articipantecom o nome.
+            Já existe participante com este nome
           </Text>
-        </Dialog>
-
-        <Dialog
-          isVisible={visible2}
-          onBackdropPress={toggleDialog2}
-          animationType="fade"
-        >
-          <View style={styles.dialogTheme}>
-            <Dialog.Title title="Adicionado" />
-            <Text style={styles.textDialog}>
-              Participante adicionado a lista de presença
-            </Text>
+          <View style={styles.dialogButtonsGroup}>
+            <Pressable
+              style={styles.dialogButtonNão}
+              onPress={() => toggleDialog1()}
+            >
+              <Text style={styles.dialogButtonText}>Ok</Text>
+            </Pressable>
           </View>
         </Dialog>
 
         <Dialog
-          isVisible={visible3}
-          onBackdropPress={toggleDialog3}
-          animationType="fade"
+          style={{ pointerEvents: visible2 ? "auto" : "none" }}
+          isVisible={visible2}
+          onBackdropPress={toggleDialog2}
+          key={Math.random()}
+          pointerEvents={visible2 ? "auto" : "none"}
+          role="dialog"
         >
-          <View style={styles.dialogTheme}></View>
-          <Dialog.Title title="Remover" />
           <Text style={styles.textDialog}>
-            Tem certeza que deseja remover o participante ?
+            Participante adicionado a lista de presença
           </Text>
-          <Dialog.Actions>
-            <Dialog.Button title="Sim" onPress={() => toggleDialog4()} />
-            <Dialog.Button title="Não" onPress={() => toggleDialog3()} />
-          </Dialog.Actions>
+          <View style={styles.dialogButtonsGroup}>
+            <Pressable
+              style={styles.dialogButtonNão}
+              onPress={() => toggleDialog2()}
+            >
+              <Text style={styles.dialogButtonText}>Ok</Text>
+            </Pressable>
+          </View>
         </Dialog>
 
         <Dialog
+          style={{ pointerEvents: visible3 ? "auto" : "none" }}
+          isVisible={visible3}
+          onBackdropPress={toggleDialog3}
+          key={Math.random()}
+          pointerEvents={visible3 ? "auto" : "none"}
+          role="dialog"
+        >
+          <Text style={styles.textDialog}>
+            Tem certeza que deseja remover o participante ?
+          </Text>
+          <View style={styles.dialogButtonsGroup}>
+            <Pressable
+              style={styles.dialogButtonSim}
+              onPress={() => toggleDialog4()}
+            >
+              <Text style={styles.dialogButtonText}>Sim</Text>
+            </Pressable>
+            <Pressable
+              style={styles.dialogButtonNão}
+              onPress={() => toggleDialog3()}
+            >
+              <Text style={styles.dialogButtonText}>Não</Text>
+            </Pressable>
+          </View>
+        </Dialog>
+
+        <Dialog
+          style={{ pointerEvents: visible4 ? "auto" : "none" }}
           isVisible={visible4}
           onBackdropPress={toggleDialog4}
-          animationType="fade"
+          key={Math.random()}
+          pointerEvents={visible4 ? "auto" : "none"}
+          role="dialog"
         >
-          <View style={styles.dialogTheme}></View>
-          <Dialog.Title title="Removido" />
           <Text style={styles.textDialog}>
             Participante removido da lista de presença
           </Text>
+          <View style={styles.dialogButtonsGroup}>
+            <Pressable
+              style={styles.dialogButtonNão}
+              onPress={() => toggleDialog4()}
+            >
+              <Text style={styles.dialogButtonText}>Ok</Text>
+            </Pressable>
+          </View>
         </Dialog>
       </>
 
@@ -108,6 +143,7 @@ export function Home() {
       <InputParticipante onAdd={handleAddParticipante} />
 
       <FlatList
+        style={styles.flatList}
         data={participantes}
         keyExtractor={(item) => item}
         showsVerticalScrollIndicator={false}

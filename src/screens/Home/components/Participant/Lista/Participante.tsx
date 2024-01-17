@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { styles, iconStyles } from "./styles";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -12,13 +12,15 @@ export function Participante({ name, onRemove }: Props) {
     <View style={styles.containerLista}>
       <Text style={styles.nameParticipante}>{name}</Text>
       <View>
-        <TouchableOpacity
+        <Pressable
           key="buttonAdd"
           onPress={onRemove}
           style={styles.buttonRemove}
+          accessible={true}
+          role="button"
         >
           <Icon name="trash-o" {...iconStyles} />
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

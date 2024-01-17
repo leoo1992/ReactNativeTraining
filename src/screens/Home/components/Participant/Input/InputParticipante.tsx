@@ -1,6 +1,6 @@
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, TextInput, Pressable, View } from "react-native";
 import { styles, iconStyles } from "./styles";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from "react-native-vector-icons/FontAwesome";
 
 type Props = {
   onAdd: () => void;
@@ -22,13 +22,15 @@ export function InputParticipante({ onAdd }: Props) {
           inputMode="text"
         />
         <View>
-          <TouchableOpacity
+          <Pressable
             key="buttonAdd"
             onPress={onAdd}
             style={styles.buttonAdd}
+            accessible={true}
+            role="button"
           >
-          <Icon name="plus" {...iconStyles}/>
-          </TouchableOpacity>
+            <Icon name="plus" {...iconStyles} />
+          </Pressable>
         </View>
       </View>
     </>
