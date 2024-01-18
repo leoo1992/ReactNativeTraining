@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { styles } from "./styles";
 import { View, FlatList, Text, Pressable } from "react-native";
-import { InputNameEvent } from "./components/InputNameEvent/InputNameEvent";
-import { InputDateEvent } from "./components/InputDateEvent/InputDateEvent";
-import { InputParticipante } from "./components/Participant/Input/InputParticipante";
-import { Participante } from "./components/Participant/Lista/Participante";
-import { SubmitButton } from "./components/SubmitButton/SubmitButton";
-import { Social } from "./components/Icons/Social";
+import { InputNameEvent } from "../components/InputNameEvent/InputNameEvent";
+import { InputDateEvent } from "../components/InputDateEvent/InputDateEvent";
+import { InputParticipante } from "../components/Participant/Input/InputParticipante";
+import { Participante } from "../components/Participant/Lista/Participante";
+import { SubmitButton } from "../components/SubmitButton/SubmitButton";
+import { Social } from "../components/Icons/Social";
 import { Dialog } from "@rneui/themed";
 
-export function Home() {
+export function Agendamento() {
   const [visible1, setVisible1] = useState(false);
   const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(false);
@@ -31,12 +31,12 @@ export function Home() {
     setVisible4(!visible4);
   };
 
-   function handleAddParticipante() {
+  function handleAddParticipante() {
     if (participantes.includes("Leo")) {
       return toggleDialog1();
     }
 
-    setParticipantes(prevState => [...prevState,'José'])
+    setParticipantes((prevState) => [...prevState, "José"]);
     toggleDialog2();
   }
 

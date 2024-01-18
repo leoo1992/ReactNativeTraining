@@ -1,6 +1,9 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from "react-native";
-import { Home } from "./src/screens/Home";
 import { ThemeProvider, CreateThemeOptions } from "@rneui/themed";
+import { Routes } from "./src/routes";
+import 'react-native-reanimated';
+
 
 interface ExtendedTheme extends CreateThemeOptions {
   backgroundColor: string;
@@ -23,7 +26,7 @@ export default function App() {
         translucent
       />
       <ThemeProvider theme={darkTheme}>
-        <Home />
+        <Routes />
       </ThemeProvider>
     </>
   );
