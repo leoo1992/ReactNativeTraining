@@ -1,3 +1,4 @@
+import React from 'react';
 import 'react-native-gesture-handler';
 import { StatusBar } from "react-native";
 import { ThemeProvider, CreateThemeOptions } from "@rneui/themed";

@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Agendamento } from "../screens/Home";
+import { Agendamento } from "../screens/Agendamento";
 import { Menu } from "../screens/Menu";
 import { MaterialIcons } from "@expo/vector-icons";
 

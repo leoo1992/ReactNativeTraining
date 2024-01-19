@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     color: "#f0f8ff",
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 12,
     justifyContent: "center",
     alignContent: "center",
     alignSelf: "center",
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   },
 
   emptyList: {
-    marginTop: 100,
+    marginTop: 40,
     backgroundColor: "#333",
     flex: 1,
     justifyContent: "center",
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     verticalAlign: "middle",
     width: "100%",
     height: "100%",
-    padding: 20,
+    padding: 10,
     borderRadius: 10,
   },
 
@@ -82,7 +82,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#E23C44",
     borderRadius: 10,
     padding: 5,
-    marginRight: 10,
     color: "#fff",
     height: 30,
     textAlign: "center",
@@ -91,10 +90,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
   },
-
+  
   dialogButtonNão: {
     flex: 0.5,
     backgroundColor: "#50Cf69",
+    marginRight: 10,
     borderRadius: 10,
     padding: 5,
     color: "#fff",
@@ -109,5 +109,6 @@ export const styles = StyleSheet.create({
   flatList: {
     backgroundColor: "#292929",
     padding: 5,
-  }
+    margin: 10,
+  },
 });

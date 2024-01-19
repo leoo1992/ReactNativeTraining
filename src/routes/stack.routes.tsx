@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Agendamento } from "../screens/Home";
+import { Agendamento } from "../screens/Agendamento";
 import { Menu } from "../screens/Menu";
 
 const { Screen, Navigator, Group } = createNativeStackNavigator();
