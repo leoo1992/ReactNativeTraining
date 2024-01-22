@@ -22,8 +22,22 @@ export function Agendamento() {
   const [v3, setV3] = useState(false);
   const [v4, setV4] = useState(false);
   const [delParticipant, setDelParticipant] = useState(false);
-  const [participant, setParticipant] = useState<string[]>([]);
   const [participantDel, setParticipantDel] = useState<string | null>(null);
+
+  const formatDate = (date: string | number | Date) => {
+    const formattedDate = new Date(date).toLocaleDateString("pt-BR", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    return formattedDate;
+  };
+
+  const [participant, setParticipant] = useState<string[]>([]);
+  const [nameEvent, setNameEvent] = useState("");
+  const dataAtual = formatDate(new Date());
+  const [dateEvent, setDateEvent] = useState(dataAtual);
 
   const Dialog1 = () => setV1(!v1);
   const Dialog2 = () => setV2(!v2);
@@ -33,12 +47,20 @@ export function Agendamento() {
     setV4(!v4);
   };
 
-  function handleAddParticipant(participantNome: string) {
+  function AddParticipant(participantNome: string) {
     if (participant.includes(participantNome)) {
       return Dialog1();
     }
     setParticipant((prevState) => [...prevState, participantNome]);
     Dialog2();
+  }
+
+  function handleAddEvent(EventNome: string) {
+    setNameEvent(EventNome);
+  }
+
+  function handleAddEventDate(EventDate: string) {
+    setDateEvent(EventDate);
   }
 
   const removeParticipant = () => {
@@ -51,14 +73,14 @@ export function Agendamento() {
     }
   };
 
-  useEffect(() => {
+    useEffect(() => {
     if (delParticipant) {
       removeParticipant();
       setDelParticipant(false);
     }
   }, [delParticipant]);
 
-  return (
+    return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View key="App" style={styles.containerApp}>
         <>
@@ -158,39 +180,50 @@ export function Agendamento() {
             </View>
           </Dialog>
         </>
-        <InputNameEvent />
-        <InputDateEvent />
-        <InputParticipante
-          onAdd={(participantNome: string) =>
-            handleAddParticipant(participantNome)
-          }
-        />
-        <FlatList
-          style={styles.flatList}
-          data={participant}
-          keyExtractor={(index) => index.toString()}
-          showsVerticalScrollIndicator={false}
-          ListEmptyComponent={() => (
-            <View style={styles.emptyList}>
-              <Text style={styles.textEmptyList}>
-                Adicione participantes para
-              </Text>
-              <Text style={styles.textEmptyList}>preencher a lista.</Text>
-            </View>
-          )}
-          renderItem={({ item, index }) => (
-            <Participante
-              key={index.toString()}
-              name={item}
-              onRemove={() => {
-                setParticipantDel(item);
-                Dialog3();
-              }}
-            />
-          )}
-        />
+        <>
+          <InputNameEvent
+            onAddEvent={(EventNome: string) => handleAddEvent(EventNome)}
+          />
+          <InputDateEvent
+            onAddDate={(EventDate: string) => handleAddEventDate(EventDate)}
+            currentDate={dataAtual} 
+          />
+          <InputParticipante
+            onAdd={(participantNome: string) => AddParticipant(participantNome)}
+          />
+        </>
+        <>
+          <FlatList
+            style={styles.flatList}
+            data={participant}
+            keyExtractor={(index) => index.toString()}
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={() => (
+              <View style={styles.emptyList}>
+                <Text style={styles.textEmptyList}>
+                  Adicione participantes para
+                </Text>
+                <Text style={styles.textEmptyList}>preencher a lista.</Text>
+              </View>
+            )}
+            renderItem={({ item, index }) => (
+              <Participante
+                key={index.toString()}
+                name={item}
+                onRemove={() => {
+                  setParticipantDel(item);
+                  Dialog3();
+                }}
+              />
+            )}
+          />
+        </>
         <View style={styles.buttonGroup}>
-          <SubmitButton />
+          <SubmitButton 
+          participant={participant}
+          nameEvent={nameEvent}
+          dateEvent={dateEvent}
+          />
           <Social />
         </View>
       </View>

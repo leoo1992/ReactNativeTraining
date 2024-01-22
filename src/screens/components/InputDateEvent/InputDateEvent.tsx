@@ -3,7 +3,7 @@ import { Text, TextInput, View, Pressable} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { styles, theme } from "./styles";
 
-export function InputDateEvent() {
+export function InputDateEvent({onAddDate, currentDate}: any) {
   const [isFocusDate, setIsFocusDate] = useState(true);
   const [isFilledDate, setIsFilledDate] = useState(true);
 
@@ -24,20 +24,9 @@ export function InputDateEvent() {
     } else {
       setIsFocusDate(true);
       setIsFilledDate(true);
+      onAddDate(text);
     }
   };
-
-  const formatDate = (date: string | number | Date) => {
-    const formattedDate = new Date(date).toLocaleDateString("pt-BR", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-    return formattedDate;
-  };
-
-  const currentDate = formatDate(new Date());
 
   const handlePressIn = () => {
     setIsFocusDate(true);

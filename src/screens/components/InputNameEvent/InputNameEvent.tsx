@@ -3,7 +3,7 @@ import { Text, TextInput, Pressable, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { styles, theme } from "./styles";
 
-export function InputNameEvent() {
+export function InputNameEvent({ onAddEvent}: any) {
   const [isFocus, setIsFocus] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
@@ -17,8 +17,9 @@ export function InputNameEvent() {
     setIsFocus(false);
   };
 
-  const handleChangeText = (text: any) => {
+  const handleChangeText = (text: string) => {
     setIsFilled(!!text);
+    onAddEvent(text);
   };
 
   const handlePressIn = () => {

@@ -13,7 +13,7 @@ export function InputParticipante({ onAdd }: any) {
 
   const handleAdd = () => {
     if (participanteNome.trim() !== "") {
-      onAdd(participanteNome.trim());
+      onAdd(participanteNome);
       setParticipanteNome("");
       setIsFilledParticipant(false);
     } else {
