@@ -1,13 +1,21 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Text, TextInput, Pressable, View } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { styles, theme } from "./styles";
 
-export function InputNameEvent({ onAddEvent}: any) {
+export function InputNameEvent({ onAddEvent, inputRef, clearInput }: any) {
   const [isFocus, setIsFocus] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const [eventName, setEventName] = useState("");
 
-  const inputRefNameEvent = useRef<TextInput>(null);
+  useFocusEffect(
+    useCallback(() => {
+      setIsFocus(false);
+      setIsFilled(false);
+      setEventName("");
+    }, [])
+  );
 
   const handleFocus = () => {
     setIsFocus(true);
@@ -19,13 +27,21 @@ export function InputNameEvent({ onAddEvent}: any) {
 
   const handleChangeText = (text: string) => {
     setIsFilled(!!text);
+    setEventName(text);
     onAddEvent(text);
   };
 
   const handlePressIn = () => {
     setIsFocus(true);
-    inputRefNameEvent.current?.focus();
+    inputRef.current?.focus();
   };
+
+  useEffect(() => {
+    if (clearInput) {
+      setEventName("");
+      onAddEvent("");
+    }
+  }, [clearInput]);
 
   return (
     <>
@@ -43,8 +59,9 @@ export function InputNameEvent({ onAddEvent}: any) {
         />
         <Pressable onPress={handlePressIn} style={styles.inputButtonClickMask}>
           <TextInput
-            ref={inputRefNameEvent}
+            ref={inputRef}
             key="inputParticipante"
+            value={eventName}
             style={isFocus || isFilled ? styles.input1 : styles.input}
             placeholder="Digite o nome do evento"
             placeholderTextColor={styles.placeholderTextColorStyles.color}

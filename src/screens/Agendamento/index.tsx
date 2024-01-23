@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { styles } from "./styles";
 import {
   View,
@@ -7,6 +8,7 @@ import {
   Pressable,
   TouchableWithoutFeedback,
   Keyboard,
+  TextInput,
 } from "react-native";
 import { InputNameEvent } from "../components/InputNameEvent/InputNameEvent";
 import { InputDateEvent } from "../components/InputDateEvent/InputDateEvent";
@@ -21,8 +23,11 @@ export function Agendamento() {
   const [v2, setV2] = useState(false);
   const [v3, setV3] = useState(false);
   const [v4, setV4] = useState(false);
+  const [v5, setV5] = useState(false);
   const [delParticipant, setDelParticipant] = useState(false);
   const [participantDel, setParticipantDel] = useState<string | null>(null);
+  const [clearInputRef, setClearInputRef] = useState(false);
+  const inputRefNameEvent = useRef<TextInput>(null);
 
   const formatDate = (date: string | number | Date) => {
     const formattedDate = new Date(date).toLocaleDateString("pt-BR", {
@@ -35,9 +40,9 @@ export function Agendamento() {
   };
 
   const [participant, setParticipant] = useState<string[]>([]);
-  const [nameEvent, setNameEvent] = useState("");
+  const [nameEvent, setNameEvent] = useState<string>("");
   const dataAtual = formatDate(new Date());
-  const [dateEvent, setDateEvent] = useState(dataAtual);
+  const [dateEvent, setDateEvent] = useState<string>(dataAtual);
 
   const Dialog1 = () => setV1(!v1);
   const Dialog2 = () => setV2(!v2);
@@ -46,11 +51,25 @@ export function Agendamento() {
     setV3(false);
     setV4(!v4);
   };
+  const Dialog5 = () => setV5(!v5);
 
   function AddParticipant(participantNome: string) {
     if (participant.includes(participantNome)) {
       return Dialog1();
     }
+
+    if (!participant) {
+      return Dialog5();
+    }
+
+    if (
+      participantNome === null ||
+      participantNome === undefined ||
+      participantNome.trim() === ""
+    ) {
+      return Dialog5();
+    }
+
     setParticipant((prevState) => [...prevState, participantNome]);
     Dialog2();
   }
@@ -73,14 +92,51 @@ export function Agendamento() {
     }
   };
 
-    useEffect(() => {
+  const clearEventNameInput = () => {
+    setClearInputRef(true);
+    inputRefNameEvent.current?.clear();
+    setNameEvent("");
+  };
+
+  const handleSubmitForm = ({ participant, nameEvent, dateEvent }: any) => {
+    console.info("Dados do formulário: ", {
+      "Nome do Evento": nameEvent,
+      "Data do Evento": dateEvent,
+      Participantes: participant,
+    });
+    setParticipant([]);
+    setDateEvent(dataAtual);
+    setClearInputRef(false);
+  };
+
+  useEffect(() => {
     if (delParticipant) {
       removeParticipant();
       setDelParticipant(false);
     }
-  }, [delParticipant]);
 
-    return (
+    if (clearInputRef) {
+      clearEventNameInput();
+    }
+  }, [delParticipant, clearInputRef]);
+
+  useFocusEffect(
+    useCallback(() => {
+      setParticipant([]);
+      setNameEvent("");
+      setDateEvent(dataAtual);
+      setDelParticipant(false);
+      setParticipantDel(null);
+      setClearInputRef(false);
+      setV1(false);
+      setV2(false);
+      setV3(false);
+      setV4(false);
+      setV5(false);
+    }, [])
+  );
+
+  return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View key="App" style={styles.containerApp}>
         <>
@@ -179,17 +235,42 @@ export function Agendamento() {
               </Pressable>
             </View>
           </Dialog>
+          <Dialog
+            style={{ pointerEvents: v5 ? "auto" : "none" }}
+            isVisible={v5}
+            onBackdropPress={Dialog5}
+            key={Math.random()}
+            pointerEvents={v5 ? "auto" : "none"}
+            role="dialog"
+          >
+            <Text style={styles.textDialog}>
+              Digite um nome para o participante.
+            </Text>
+            <View style={styles.dialogButtonsGroup}>
+              <Pressable
+                style={styles.dialogButtonNão}
+                onPress={() => Dialog5()}
+              >
+                <Text style={styles.dialogButtonText}>Ok</Text>
+              </Pressable>
+            </View>
+          </Dialog>
         </>
         <>
           <InputNameEvent
             onAddEvent={(EventNome: string) => handleAddEvent(EventNome)}
+            clearInput={clearInputRef}
+            inputRef={inputRefNameEvent}
+            onSubmitEditing={handleSubmitForm}
           />
           <InputDateEvent
             onAddDate={(EventDate: string) => handleAddEventDate(EventDate)}
-            currentDate={dataAtual} 
+            currentDate={dataAtual}
+            onSubmitEditing={handleSubmitForm}
           />
           <InputParticipante
             onAdd={(participantNome: string) => AddParticipant(participantNome)}
+            onSubmitEditing={handleSubmitForm}
           />
         </>
         <>
@@ -219,10 +300,11 @@ export function Agendamento() {
           />
         </>
         <View style={styles.buttonGroup}>
-          <SubmitButton 
-          participant={participant}
-          nameEvent={nameEvent}
-          dateEvent={dateEvent}
+          <SubmitButton
+            participant={participant}
+            nameEvent={nameEvent}
+            dateEvent={dateEvent}
+            onSubmit={handleSubmitForm}
           />
           <Social />
         </View>
