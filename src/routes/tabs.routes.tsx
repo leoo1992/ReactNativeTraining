@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Agendamento } from "../screens/Agendamento";
 import { Menu } from "../screens/Menu";
+import { ListaEvento } from "../screens/ListaEvento";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const { Screen, Navigator, Group } = createBottomTabNavigator();
@@ -40,6 +41,17 @@ export function TabsRoutes() {
             tabBarLabel: "Agendamento",
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="date-range" color={color} size={size} />
+            ),
+          }}
+        />
+        <Screen
+          name="ListaEvento"
+          component={ListaEvento}
+          options={{
+            title: "Eventos agendados",
+            tabBarLabel: "Eventos agendados",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="timeline" color={color} size={size} />
             ),
           }}
         />

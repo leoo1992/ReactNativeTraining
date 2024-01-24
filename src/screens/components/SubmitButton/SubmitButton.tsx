@@ -13,23 +13,46 @@ export function SubmitButton({
   const navigation = useNavigation();
   const [s1, setS1] = useState(false);
   const [s2, setS2] = useState(false);
+  const [s3, setS3] = useState(false);
 
   const DialogS1 = () => setS1(!s1);
   const DialogS2 = () => setS2(!s2);
+  const DialogS3 = () => setS3(!s3);
 
   function handleSubmit() {
-    if (dateEvent && nameEvent && participant && participant.length > 0) {
-      DialogS1();  
-    } else DialogS2();
-  }
+    const isAnyParticipantExceedsLimit = participant.some(
+      (p: any[]) => p.length > 20
+    );
 
+    if (
+      dateEvent &&
+      nameEvent &&
+      participant &&
+      participant.length > 0 &&
+      !(nameEvent.length >= 35) &&
+      !isAnyParticipantExceedsLimit
+    ) {
+      DialogS1();
+    } else if (nameEvent.length >= 35 || isAnyParticipantExceedsLimit) {
+      DialogS3();
+    } else {
+      DialogS2();
+    }
+  }
   function openMenu() {
     DialogS1();
     onSubmit({ participant, nameEvent, dateEvent });
+
+    const eventData = {
+      nameEvent,
+      dateEvent,
+      participants: participant,
+    };
+
+    navigation.navigate("ListaEvento", { eventData });
     participant = [];
     nameEvent = "";
     dateEvent = "";
-    navigation.navigate("Menu");
   }
 
   return (
@@ -79,6 +102,27 @@ export function SubmitButton({
             <Pressable
               style={styles.dialogButtonNão}
               onPress={() => DialogS2()}
+            >
+              <Text style={styles.dialogButtonText}>Ok</Text>
+            </Pressable>
+          </View>
+        </Dialog>
+
+        <Dialog
+          style={{ pointerEvents: s3 ? "auto" : "none" }}
+          isVisible={s3}
+          onBackdropPress={DialogS3}
+          key={Math.random()}
+          pointerEvents={s3 ? "auto" : "none"}
+          role="dialog"
+        >
+          <Text style={styles.textDialogTitle2}>
+            Verifique o limite de digitos
+          </Text>
+          <View style={styles.dialogButtonsGroup}>
+            <Pressable
+              style={styles.dialogButtonNão}
+              onPress={() => DialogS3()}
             >
               <Text style={styles.dialogButtonText}>Ok</Text>
             </Pressable>

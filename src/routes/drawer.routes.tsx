@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Agendamento } from "../screens/Agendamento";
 import { Menu } from "../screens/Menu";
+import { ListaEvento } from "../screens/ListaEvento";
 import { MaterialIcons } from "@expo/vector-icons";
 const { Screen, Navigator, Group } = createDrawerNavigator();
 
@@ -65,9 +66,27 @@ export function DrawerRoutes() {
                 color="white"
                 style={{ marginRight: 40, marginTop: 5 }}
               />
-            ),
-          }}
+              ),
+            }}
         />
+            <Screen
+              name="ListaEvento"
+              component={ListaEvento}
+              options={{
+                title: "Eventos agendados",
+                drawerIcon: ({ color, size }) => (
+                  <MaterialIcons name="timeline" color={color} size={size} />
+                ),
+                headerRight: () => (
+                  <MaterialIcons
+                    name="timeline"
+                    size={25}
+                    color="white"
+                    style={{ marginRight: 40, marginTop: 5 }}
+                  />
+                ),
+              }}
+            />
       </Group>
     </Navigator>
   );

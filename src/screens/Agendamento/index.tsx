@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation  } from "@react-navigation/native";
 import { styles } from "./styles";
 import {
   View,
@@ -28,6 +28,7 @@ export function Agendamento() {
   const [participantDel, setParticipantDel] = useState<string | null>(null);
   const [clearInputRef, setClearInputRef] = useState(false);
   const inputRefNameEvent = useRef<TextInput>(null);
+  const navigation = useNavigation();
 
   const formatDate = (date: string | number | Date) => {
     const formattedDate = new Date(date).toLocaleDateString("pt-BR", {
@@ -104,6 +105,15 @@ export function Agendamento() {
       "Data do Evento": dateEvent,
       Participantes: participant,
     });
+
+    const eventData = {
+      nameEvent,
+      dateEvent,
+      participants: participant,
+    };
+
+    navigation.navigate("ListaEvento", { eventData });
+
     setParticipant([]);
     setDateEvent(dataAtual);
     setClearInputRef(false);

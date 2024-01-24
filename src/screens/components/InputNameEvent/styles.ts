@@ -21,6 +21,10 @@ export const styles = StyleSheet.create({
     marginLeft: 40,
   },
 
+  textInvalid: {
+    color: "lightcoral",
+  },
+
   input: {
     marginTop: 5,
     backgroundColor: "#1f1e25",
@@ -78,6 +82,17 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: 50,
     justifyContent: "center",
+  },
+
+  validationMessage: {
+    color: "lightcoral",
+    fontSize: 10,
+    marginLeft: 40
+  },
+
+  inputInvalid: {
+    borderColor: "lightcoral",
+    color: "lightcoral",
   },
 });
 

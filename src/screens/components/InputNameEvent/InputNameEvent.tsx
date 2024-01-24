@@ -7,6 +7,7 @@ import { styles, theme } from "./styles";
 export function InputNameEvent({ onAddEvent, inputRef, clearInput }: any) {
   const [isFocus, setIsFocus] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const [eventName, setEventName] = useState("");
 
   useFocusEffect(
@@ -26,9 +27,14 @@ export function InputNameEvent({ onAddEvent, inputRef, clearInput }: any) {
   };
 
   const handleChangeText = (text: string) => {
-    setIsFilled(!!text);
-    setEventName(text);
-    onAddEvent(text);
+    if (text.length <= 35) {
+      setIsValid(true);
+      setIsFilled(!!text);
+      setEventName(text);
+      onAddEvent(text);
+    } else {
+      setIsValid(false);
+    }
   };
 
   const handlePressIn = () => {
@@ -47,7 +53,11 @@ export function InputNameEvent({ onAddEvent, inputRef, clearInput }: any) {
     <>
       <Text
         key="TextEventName"
-        style={isFocus || isFilled ? styles.textTitle1 : styles.textTitle}
+        style={
+          isFocus || isFilled
+            ? [styles.textTitle1, !isValid && styles.textInvalid]
+            : [styles.textTitle, !isValid && styles.textInvalid]
+        }
       >
         Nome do Evento:
       </Text>
@@ -55,14 +65,24 @@ export function InputNameEvent({ onAddEvent, inputRef, clearInput }: any) {
         <Icon
           name="edit"
           size={20}
-          style={isFocus || isFilled ? styles.icon1 : styles.icon}
+          style={
+            isFocus || isFilled
+              ? [styles.icon1, !isValid && { color: "lightcoral" }]
+              : [styles.icon, !isValid && { color: "lightcoral" }]
+          }
         />
         <Pressable onPress={handlePressIn} style={styles.inputButtonClickMask}>
           <TextInput
             ref={inputRef}
             key="inputParticipante"
             value={eventName}
-            style={isFocus || isFilled ? styles.input1 : styles.input}
+            style={
+              !isValid
+                ? [styles.input, styles.inputInvalid]
+                : isFocus || isFilled
+                ? styles.input1
+                : styles.input
+            }
             placeholder="Digite o nome do evento"
             placeholderTextColor={styles.placeholderTextColorStyles.color}
             keyboardAppearance={theme}
@@ -70,9 +90,13 @@ export function InputNameEvent({ onAddEvent, inputRef, clearInput }: any) {
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChangeText={handleChangeText}
+            maxLength={36}
           />
         </Pressable>
       </View>
+      {!isValid && (
+        <Text style={styles.validationMessage}>* Limite de 35 caracteres.</Text>
+      )}
     </>
   );
 }

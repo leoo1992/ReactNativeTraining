@@ -3,6 +3,7 @@ export declare global {
         interface RootParamList {
             Menu: undefined;
             Agendamento: undefined;
+            ListaEvento: any;
         }
     }
 }

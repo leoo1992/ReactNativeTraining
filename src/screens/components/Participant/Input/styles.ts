@@ -101,6 +101,21 @@ export const styles = StyleSheet.create({
     height: 55,
     justifyContent: "center",
   },
+
+  validationMessage: {
+    color: "lightcoral",
+    fontSize: 10,
+    marginLeft: 40
+  },
+
+  inputInvalid: {
+    borderColor: "lightcoral",
+    color: "lightcoral",
+  },
+
+  textInvalid: {
+    color: "lightcoral",
+  },
 });
 
 export const iconStyles = {

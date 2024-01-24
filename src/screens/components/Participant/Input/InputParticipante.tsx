@@ -8,11 +8,12 @@ export function InputParticipante({ onAdd }: any) {
   const [participanteNome, setParticipanteNome] = useState("");
   const [isFocusParticipant, setIsFocusParticipant] = useState(false);
   const [isFilledParticipant, setIsFilledParticipant] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
   const inputRef = useRef<TextInput>(null);
 
   const handleAdd = () => {
-    if (participanteNome.trim() !== "") {
+    if (participanteNome.trim() !== "" && isValid) {
       onAdd(participanteNome);
       setParticipanteNome("");
       setIsFilledParticipant(false);
@@ -31,6 +32,18 @@ export function InputParticipante({ onAdd }: any) {
 
   const handleChangeText = (text: any) => {
     setIsFilledParticipant(!!text);
+    setParticipanteNome(text);
+
+    if (
+      text.trim() === "" ||
+      text.trim() === null ||
+      text.trim() === undefined ||
+      text.length >= 20
+    ) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
   };
 
   const handlePressIn = () => {
@@ -48,8 +61,8 @@ export function InputParticipante({ onAdd }: any) {
         key="TextParticipante"
         style={
           isFocusParticipant || isFilledParticipant
-            ? styles.textTitle1
-            : styles.textTitle
+            ? [styles.textTitle1, !isValid && styles.textInvalid]
+            : [styles.textTitle, !isValid && styles.textInvalid]
         }
       >
         Nome do Participante:
@@ -61,18 +74,17 @@ export function InputParticipante({ onAdd }: any) {
           size={20}
           style={
             isFocusParticipant || isFilledParticipant
-              ? styles.icon1
-              : styles.icon
+              ? [styles.icon1, !isValid && { color: "lightcoral" }]
+              : [styles.icon, !isValid && { color: "lightcoral" }]
           }
         />
-        <Pressable
-        onPress={handlePressIn}
-        style={styles.inputButtonClickMask}
-        >
+        <Pressable onPress={handlePressIn} style={styles.inputButtonClickMask}>
           <TextInput
             ref={inputRef}
             style={
-              isFocusParticipant || isFilledParticipant
+              !isValid
+                ? [styles.inputParticipante, styles.inputInvalid]
+                : isFocusParticipant || isFilledParticipant
                 ? styles.inputParticipante1
                 : styles.inputParticipante
             }
@@ -85,22 +97,26 @@ export function InputParticipante({ onAdd }: any) {
             value={participanteNome}
             onChangeText={(text) => {
               handleChangeText(text);
-              setParticipanteNome(text);
             }}
           />
         </Pressable>
-        <Pressable
-          key="buttonAdd"
-          onPress={handleAdd}
-          style={styles.buttonAdd}
-          accessible={true}
-          role="button"
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-        >
-          <Icon name="plus" {...iconStyles} />
-        </Pressable>
+        {isValid && (
+          <Pressable
+            key="buttonAdd"
+            onPress={handleAdd}
+            style={styles.buttonAdd}
+            accessible={true}
+            role="button"
+            onPressIn={handlePressIn}
+            onPressOut={handlePressOut}
+          >
+            <Icon name="plus" {...iconStyles} />
+          </Pressable>
+        )}
       </View>
+      {!isValid && (
+        <Text style={styles.validationMessage}>* Limite de 20 caracteres.</Text>
+      )}
     </>
   );
 }
