@@ -52,7 +52,7 @@ export function SubmitButton({
     navigation.navigate("ListaEvento", { eventData });
     participant = [];
     nameEvent = "";
-    dateEvent = "";
+    dateEvent = new Date();
   }
 
   return (

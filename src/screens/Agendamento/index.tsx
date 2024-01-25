@@ -30,20 +30,19 @@ export function Agendamento() {
   const inputRefNameEvent = useRef<TextInput>(null);
   const navigation = useNavigation();
 
-  const formatDate = (date: string | number | Date) => {
-    const formattedDate = new Date(date).toLocaleDateString("pt-BR", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-    return formattedDate;
-  };
-
   const [participant, setParticipant] = useState<string[]>([]);
   const [nameEvent, setNameEvent] = useState<string>("");
-  const dataAtual = formatDate(new Date());
-  const [dateEvent, setDateEvent] = useState<string>(dataAtual);
+  function formatarData(data: Date) {
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); 
+    const ano = data.getFullYear();
+  
+    return `${dia}-${mes}-${ano}`;
+  }
+  
+  const dataAtual = new Date();
+  const dataFormatada = formatarData(dataAtual);
+  const [dateEvent, setDateEvent] = useState<string>(dataFormatada);
 
   const Dialog1 = () => setV1(!v1);
   const Dialog2 = () => setV2(!v2);
@@ -115,7 +114,7 @@ export function Agendamento() {
     navigation.navigate("ListaEvento", { eventData });
 
     setParticipant([]);
-    setDateEvent(dataAtual);
+    setDateEvent(dataFormatada);
     setClearInputRef(false);
   };
 
@@ -134,7 +133,7 @@ export function Agendamento() {
     useCallback(() => {
       setParticipant([]);
       setNameEvent("");
-      setDateEvent(dataAtual);
+      setDateEvent(dataFormatada);
       setDelParticipant(false);
       setParticipantDel(null);
       setClearInputRef(false);
@@ -275,7 +274,6 @@ export function Agendamento() {
           />
           <InputDateEvent
             onAddDate={(EventDate: string) => handleAddEventDate(EventDate)}
-            currentDate={dataAtual}
             onSubmitEditing={handleSubmitForm}
           />
           <InputParticipante

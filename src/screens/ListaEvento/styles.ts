@@ -15,11 +15,11 @@ export const styles = StyleSheet.create({
   },
 
   containerEvent: {
-    backgroundColor: "#292929",
+    backgroundColor: "#555555",
     padding: 10,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#9999",
+    borderColor: "#999",
     marginBottom: 5,
   },
 
@@ -100,26 +100,21 @@ export const styles = StyleSheet.create({
   },
 
   iconDelete: {
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    verticalAlign: "middle",
-    alignSelf: "center",
     textAlign: "center",
-    flex: 1,
     padding: 0,
     margin: 0,
+    fontSize: 15,
   },
 
   buttonDelete: {
-    justifyContent: "flex-end",
-    alignContent: "flex-end",
-    alignItems: "flex-end",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
     alignSelf: "flex-end",
     backgroundColor: "#000",
     borderRadius: 25,
     padding: 5,
-    borderColor: "red",
+    borderColor: "#999",
     borderWidth: 1,
     width: 30,
     height: 30,

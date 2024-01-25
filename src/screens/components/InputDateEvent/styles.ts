@@ -78,6 +78,32 @@ export const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
   },
+
+  modalBackground: {
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center",
+    alignSelf: "center",
+    alignContent: "center",
+    alignItems: "center",
+    verticalAlign: "middle",
+    flex: 1,
+    padding: 20,
+  },
+
+  modalContainer:{
+    backgroundColor: "rgba(0,0,0,0.9)",
+    padding: 20,
+    justifyContent: "center",
+    alignSelf: "center",
+    alignContent: "center",
+    alignItems: "center",
+    verticalAlign: "middle",
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#9999",
+  }
+
+
 });
 
 export const theme = "dark";

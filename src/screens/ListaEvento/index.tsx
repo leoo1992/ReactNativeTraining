@@ -87,7 +87,6 @@ export function ListaEvento({ route }: ListaEventoProps) {
                 >
                   <Icon
                     name="delete"
-                    size={20}
                     color="red"
                     style={styles.iconDelete}
                   />
