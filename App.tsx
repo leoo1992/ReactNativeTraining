@@ -1,10 +1,7 @@
-import React from 'react';
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import { StatusBar } from "react-native";
 import { ThemeProvider, CreateThemeOptions } from "@rneui/themed";
 import { Routes } from "./src/routes";
-import 'react-native-reanimated';
-
 
 interface ExtendedTheme extends CreateThemeOptions {
   backgroundColor: string;
@@ -14,11 +11,12 @@ interface ExtendedTheme extends CreateThemeOptions {
 
 const darkTheme: ExtendedTheme = {
   backgroundColor: "#333",
-  textColor: "#fff", 
-  titleColor: "#fff", 
+  textColor: "#fff",
+  titleColor: "#fff",
 };
 
 export default function App() {
+  
   return (
     <>
       <StatusBar
@@ -27,7 +25,7 @@ export default function App() {
         translucent
       />
       <ThemeProvider theme={darkTheme}>
-        <Routes />
+          <Routes />
       </ThemeProvider>
     </>
   );

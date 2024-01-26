@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useFocusEffect, useNavigation  } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { styles } from "./styles";
 import {
   View,
@@ -10,13 +10,14 @@ import {
   Keyboard,
   TextInput,
 } from "react-native";
-import { InputNameEvent } from "../components/InputNameEvent/InputNameEvent";
-import { InputDateEvent } from "../components/InputDateEvent/InputDateEvent";
-import { InputParticipante } from "../components/Participant/Input/InputParticipante";
-import { Participante } from "../components/Participant/Lista/Participante";
-import { SubmitButton } from "../components/SubmitButton/SubmitButton";
-import { Social } from "../components/Icons/Social";
+import { InputNameEvent } from "../../components/InputNameEvent/InputNameEvent";
+import { InputDateEvent } from "../../components/InputDateEvent/InputDateEvent";
+import { InputParticipante } from "../../components/Participant/Input/InputParticipante";
+import { Participante } from "../../components/Participant/Lista/Participante";
+import { SubmitButton } from "../../components/SubmitButton/SubmitButton";
+import { Social } from "../../components/Icons/Social";
 import { Dialog } from "@rneui/themed";
+import { CustomDialog } from "../../components/CustomDialog";
 
 export function Agendamento() {
   const [v1, setV1] = useState(false);
@@ -33,13 +34,13 @@ export function Agendamento() {
   const [participant, setParticipant] = useState<string[]>([]);
   const [nameEvent, setNameEvent] = useState<string>("");
   function formatarData(data: Date) {
-    const dia = String(data.getDate()).padStart(2, '0');
-    const mes = String(data.getMonth() + 1).padStart(2, '0'); 
+    const dia = String(data.getDate()).padStart(2, "0");
+    const mes = String(data.getMonth() + 1).padStart(2, "0");
     const ano = data.getFullYear();
-  
+
     return `${dia}-${mes}-${ano}`;
   }
-  
+
   const dataAtual = new Date();
   const dataFormatada = formatarData(dataAtual);
   const [dateEvent, setDateEvent] = useState<string>(dataFormatada);
@@ -98,20 +99,20 @@ export function Agendamento() {
     setNameEvent("");
   };
 
-  const handleSubmitForm = ({ participant, nameEvent, dateEvent }: any) => {
-    console.info("Dados do formulário: ", {
-      "Nome do Evento": nameEvent,
-      "Data do Evento": dateEvent,
-      Participantes: participant,
-    });
-
+  const handleSubmitForm = ({
+    index,
+    participant,
+    nameEvent,
+    dateEvent,
+  }: any) => {
     const eventData = {
+      index,
       nameEvent,
       dateEvent,
       participants: participant,
     };
 
-    navigation.navigate("ListaEvento", { eventData });
+    navigation.navigate("Eventos", { eventData });
 
     setParticipant([]);
     setDateEvent(dataFormatada);
@@ -149,121 +150,51 @@ export function Agendamento() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View key="App" style={styles.containerApp}>
         <>
-          <Dialog
-            style={{ pointerEvents: v1 ? "auto" : "none" }}
+          <CustomDialog
             isVisible={v1}
             onBackdropPress={Dialog1}
-            key={Math.random()}
-            pointerEvents={v1 ? "auto" : "none"}
-            role="dialog"
+            buttonText="Ok"
           >
             <Text style={styles.textDialog}>
               Já existe participante com este nome
             </Text>
-            <View style={styles.dialogButtonsGroup}>
-              <Pressable
-                style={styles.dialogButtonNão}
-                onPress={() => Dialog1()}
-              >
-                <Text style={styles.dialogButtonText}>Ok</Text>
-              </Pressable>
-            </View>
-          </Dialog>
-          <Dialog
-            style={{ pointerEvents: v2 ? "auto" : "none" }}
+          </CustomDialog>
+          <CustomDialog
             isVisible={v2}
             onBackdropPress={Dialog2}
-            key={Math.random()}
-            pointerEvents={v2 ? "auto" : "none"}
-            role="dialog"
+            buttonText="Ok"
           >
             <Text style={styles.textDialog}>
-              Participante adicionado a lista de presença
+              Participante adicionado à lista de presença
             </Text>
-            <View style={styles.dialogButtonsGroup}>
-              <Pressable
-                style={styles.dialogButtonNão}
-                onPress={() => Dialog2()}
-              >
-                <Text style={styles.dialogButtonText}>Ok</Text>
-              </Pressable>
-            </View>
-          </Dialog>
-          <Dialog
-            style={{ pointerEvents: v3 ? "auto" : "none" }}
+          </CustomDialog>
+          <CustomDialog
             isVisible={v3}
-            onBackdropPress={() => {
-              setParticipantDel(null);
-              Dialog3();
-            }}
-            key={Math.random()}
-            pointerEvents={v3 ? "auto" : "none"}
-            role="dialog"
+            onBackdropPress={() => setParticipantDel(null)}
+            buttonText="Não"
           >
             <Text style={styles.textDialog}>
               Tem certeza que deseja remover o participante?
             </Text>
-            <View style={styles.dialogButtonsGroup}>
-              <Pressable
-                style={styles.dialogButtonNão}
-                onPress={() => {
-                  setParticipantDel(null);
-                  Dialog3();
-                }}
-              >
-                <Text style={styles.dialogButtonText}>Não</Text>
-              </Pressable>
-              <Pressable
-                style={styles.dialogButtonSim}
-                onPress={() => {
-                  removeParticipant();
-                  Dialog3();
-                }}
-              >
-                <Text style={styles.dialogButtonText}>Sim</Text>
-              </Pressable>
-            </View>
-          </Dialog>
-          <Dialog
-            style={{ pointerEvents: v4 ? "auto" : "none" }}
+          </CustomDialog>
+          <CustomDialog
             isVisible={v4}
             onBackdropPress={Dialog4}
-            key={Math.random()}
-            pointerEvents={v4 ? "auto" : "none"}
-            role="dialog"
+            buttonText="Ok"
           >
             <Text style={styles.textDialog}>
               Participante removido da lista de presença
             </Text>
-            <View style={styles.dialogButtonsGroup}>
-              <Pressable
-                style={styles.dialogButtonNão}
-                onPress={() => Dialog4()}
-              >
-                <Text style={styles.dialogButtonText}>Ok</Text>
-              </Pressable>
-            </View>
-          </Dialog>
-          <Dialog
-            style={{ pointerEvents: v5 ? "auto" : "none" }}
+          </CustomDialog>
+          <CustomDialog
             isVisible={v5}
             onBackdropPress={Dialog5}
-            key={Math.random()}
-            pointerEvents={v5 ? "auto" : "none"}
-            role="dialog"
+            buttonText="Ok"
           >
             <Text style={styles.textDialog}>
               Digite um nome para o participante.
             </Text>
-            <View style={styles.dialogButtonsGroup}>
-              <Pressable
-                style={styles.dialogButtonNão}
-                onPress={() => Dialog5()}
-              >
-                <Text style={styles.dialogButtonText}>Ok</Text>
-              </Pressable>
-            </View>
-          </Dialog>
+          </CustomDialog>
         </>
         <>
           <InputNameEvent
@@ -288,6 +219,7 @@ export function Agendamento() {
             keyExtractor={(index) => index.toString()}
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={() => (
+              // TODO: Componentizar
               <View style={styles.emptyList}>
                 <Text style={styles.textEmptyList}>
                   Adicione participantes para

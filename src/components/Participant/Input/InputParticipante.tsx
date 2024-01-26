@@ -35,9 +35,6 @@ export function InputParticipante({ onAdd }: any) {
     setParticipanteNome(text);
 
     if (
-      text.trim() === "" ||
-      text.trim() === null ||
-      text.trim() === undefined ||
       text.length >= 20
     ) {
       setIsValid(false);

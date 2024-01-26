@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Agendamento } from "../screens/Agendamento";
 import { Menu } from "../screens/Menu";
-import { ListaEvento } from "../screens/ListaEvento";
+import { Eventos } from "../screens/Eventos";
 
 const { Screen, Navigator, Group } = createNativeStackNavigator();
 
@@ -33,10 +33,10 @@ export function StackRoutes() {
           }}
         />
         <Screen
-          name="ListaEvento"
-          component={ListaEvento}
+          name="Eventos"
+          component={Eventos}
           options={{
-            title: "Eventos agendados",
+            title: "Eventos",
           }}
         />
       </Group>

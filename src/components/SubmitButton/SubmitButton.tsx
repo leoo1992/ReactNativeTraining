@@ -5,6 +5,7 @@ import { Dialog } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
 export function SubmitButton({
+  index,
   participant,
   nameEvent,
   dateEvent,
@@ -41,15 +42,16 @@ export function SubmitButton({
   }
   function openMenu() {
     DialogS1();
-    onSubmit({ participant, nameEvent, dateEvent });
+    onSubmit({ index, participant, nameEvent, dateEvent });
 
     const eventData = {
+      index,
       nameEvent,
       dateEvent,
       participants: participant,
     };
 
-    navigation.navigate("ListaEvento", { eventData });
+    navigation.navigate("Eventos", { eventData });
     participant = [];
     nameEvent = "";
     dateEvent = new Date();

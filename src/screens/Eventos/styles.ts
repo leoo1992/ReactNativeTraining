@@ -4,14 +4,16 @@ export const styles = StyleSheet.create({
   containerApp: {
     flex: 1,
     backgroundColor: "#212529",
-    padding: 10,
+    paddingHorizontal: 10,
     justifyContent: "center",
+    margin: 0,
   },
 
   containerApp2: {
     flex: 1,
     backgroundColor: "#212529",
-    padding: 10,
+    paddingHorizontal: 10,
+    margin: 0,
   },
 
   containerEvent: {
@@ -21,6 +23,8 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#999",
     marginBottom: 5,
+    marginTop: 5,
+    flexDirection: "row",
   },
 
   textEvent: {
@@ -76,29 +80,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  iconPlus: {
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    verticalAlign: "middle",
-    textAlign: "center",
-  },
-
-  buttonPlus: {
-    backgroundColor: "#000",
-    marginTop: 20,
-    borderRadius: 25,
-    height: 50,
-    width: 50,
-    alignSelf: "center",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    verticalAlign: "middle",
-    borderWidth: 1,
-    borderColor: "lime",
-  },
-
   iconDelete: {
     textAlign: "center",
     padding: 0,
@@ -110,14 +91,31 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
-    alignSelf: "flex-end",
+    textAlign: "center",
+    alignSelf: "center",
     backgroundColor: "#000",
     borderRadius: 25,
-    padding: 5,
     borderColor: "#999",
     borderWidth: 1,
     width: 30,
     height: 30,
     margin: 0,
+  },
+
+  dragIndicator: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    alignSelf: "center",
+    verticalAlign: "middle",
+    fontSize: 20,
+    margin: 0,
+    paddingVertical: 5,
+    backgroundColor: "#000",
+    borderRadius: 5,
+    borderColor: "#999",
+    borderWidth: 1,
+    color:"white"
   },
 });
