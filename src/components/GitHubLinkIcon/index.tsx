@@ -4,7 +4,7 @@ import { View, Pressable, Linking } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export function Social() {
+export function GitHubLinkIcon() {
   const handleGithubPress = () => {
     const githubURL = "https://github.com/leoo1992";
     Linking.openURL(githubURL);

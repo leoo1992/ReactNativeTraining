@@ -27,7 +27,7 @@ export function InputNameEvent({ onAddEvent, inputRef, clearInput }: any) {
   };
 
   const handleChangeText = (text: string) => {
-    if (text.length <= 35) {
+    if (text.length <= 30) {
       setIsValid(true);
       setIsFilled(!!text);
       setEventName(text);
@@ -95,7 +95,7 @@ export function InputNameEvent({ onAddEvent, inputRef, clearInput }: any) {
         </Pressable>
       </View>
       {!isValid && (
-        <Text style={styles.validationMessage}>* Limite de 35 caracteres.</Text>
+        <Text style={styles.validationMessage}>* Limite de 30 caracteres.</Text>
       )}
     </>
   );

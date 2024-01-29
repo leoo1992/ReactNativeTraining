@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   containerLista: {
     width: "100%",
     backgroundColor: "#1f1e25",
-    margin: 5,
+    marginVertical: 5,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   nameParticipante: {
     flex: 1,
     color: "#dee2e6",
-    fontSize: 14,
+    fontSize: 12,
     verticalAlign: "middle",
   },
 
@@ -48,8 +48,7 @@ export const styles = StyleSheet.create({
   },
 
   icon: {
-    marginRight: 10,
-    marginLeft: 10,
+    marginRight: 5,
     color: "#f0f8ff",
   },
 });

@@ -2,11 +2,13 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   containerApp: {
-    flex: 1,
     backgroundColor: "#212529",
-    paddingHorizontal: 10,
     justifyContent: "center",
-    margin: 0,
+    alignContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    verticalAlign: "middle",
+    marginTop: 60,
   },
 
   containerApp2: {
@@ -18,30 +20,29 @@ export const styles = StyleSheet.create({
 
   containerEvent: {
     backgroundColor: "#555555",
-    padding: 10,
+    padding: 5,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#999",
-    marginBottom: 5,
-    marginTop: 5,
+    marginVertical: 5,
     flexDirection: "row",
   },
 
   textEvent: {
     color: "#dee2e6",
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "bold",
   },
 
   textEvent2: {
     color: "#dee2e6",
-    fontSize: 14,
+    fontSize: 12,
   },
 
   textEvents: {
     color: "#fff",
-    fontSize: 16,
-    marginLeft: 10,
+    fontSize: 12,
+    marginLeft: 5,
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
@@ -51,7 +52,7 @@ export const styles = StyleSheet.create({
 
   textEventEmpty: {
     color: "#dee2e6",
-    fontSize: 16,
+    fontSize: 12,
     textAlign: "center",
     fontWeight: "bold",
   },
@@ -63,7 +64,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#999",
     marginTop: 5,
-    width: "80%",
+    width: "100%",
   },
 
   icon: {
@@ -116,6 +117,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "#999",
     borderWidth: 1,
-    color:"white"
+    color: "white",
   },
 });

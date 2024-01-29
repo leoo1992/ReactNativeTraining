@@ -25,6 +25,12 @@ interface EventosProps {
   };
 }
 
+//TODO : Criar função para confirmar a exclusão antes de deletar o evento
+//TODO : Refatorar componentizando o : ListEmptyComponent
+//TODO : Refatorar componentizando o : itemLista
+//TODO : Refatorar componentizando o : listaDeParticipantes
+//TODO : Criar um ViewController retirando toda logica da view
+
 export function Eventos({ route }: EventosProps | any) {
   const refFlatList = useRef(null);
   const { eventData } = route.params || {};
@@ -77,6 +83,8 @@ export function Eventos({ route }: EventosProps | any) {
             style={{
               elevation: isActive ? 30 : 0,
               opacity: isActive ? 0.5 : 1,
+              margin: 0,
+              padding: 0,
             }}
           >
             <View style={styles.containerEvent}>
@@ -107,7 +115,7 @@ export function Eventos({ route }: EventosProps | any) {
                 />
               </View>
 
-              <View style={{ justifyContent: "space-between" }}>
+              <View style={{ justifyContent: "space-between", padding: 0, margin: 0 }}>
                 <TouchableOpacity
                   style={styles.buttonDelete}
                   onPress={() => handleDeleteEvent(index)}
@@ -130,28 +138,28 @@ export function Eventos({ route }: EventosProps | any) {
   };
 
   return (
-    <>
-      {eventData ? (
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <View style={styles.containerApp2}>
-            <DraggableFlatList
-              ref={refFlatList}
-              data={eventList}
-              keyExtractor={(item, index) => index.toString()}
-              onDragEnd={({ data }) => {
-                setEventList(data);
-              }}
-              renderItem={itemLista}
-            />
-            <BtnNavToAgendamento />
-          </View>
-        </GestureHandlerRootView>
-      ) : (
-        <View style={styles.containerApp}>
-          <Text style={styles.textEventEmpty}>Não há eventos cadastrados</Text>
-          <BtnNavToAgendamento />
-        </View>
-      )}
-    </>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={styles.containerApp2}>
+        <DraggableFlatList
+          ref={refFlatList}
+          data={eventList}
+          ListEmptyComponent={() => (
+            <>
+              <View style={styles.containerApp}>
+                <Text style={styles.textEventEmpty}>
+                  Não há eventos cadastrados
+                </Text>
+              </View>
+            </>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+          onDragEnd={({ data }) => {
+            setEventList(data);
+          }}
+          renderItem={itemLista}
+        />
+        <BtnNavToAgendamento />
+      </View>
+    </GestureHandlerRootView>
   );
 }

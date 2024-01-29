@@ -5,7 +5,7 @@ import IconM from "react-native-vector-icons/MaterialIcons";
 
 type Props = {
   name: string;
-  onRemove: () => void;
+  onRemove: () => any | void;
 };
 
 export function Participante({ name, onRemove }: Props) {
@@ -15,7 +15,7 @@ export function Participante({ name, onRemove }: Props) {
       <Text style={styles.nameParticipante}>{name}</Text>
       <View>
         <Pressable
-          key="buttonAdd"
+          key="buttonRemove"
           onPress={onRemove}
           style={styles.buttonRemove}
           accessible={true}
