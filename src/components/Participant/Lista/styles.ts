@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   containerLista: {
     width: "100%",
     backgroundColor: "#1f1e25",
-    marginVertical: 5,
+    marginBottom: 5,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",

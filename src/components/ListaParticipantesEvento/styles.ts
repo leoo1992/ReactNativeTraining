@@ -2,13 +2,6 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 
-  containerApp2: {
-    flex: 1,
-    backgroundColor: "#212529",
-    paddingHorizontal: 10,
-    margin: 0,
-  },
-
   textEvents: {
     color: "#fff",
     fontSize: 12,
@@ -20,14 +13,18 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
 
-  textDialog: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#f0f8ff",
-    textAlign: "center",
+  icon: {
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
-    alignSelf: "center",
+    verticalAlign: "middle",
   },
+
+  containerParticipants: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+ 
 });
