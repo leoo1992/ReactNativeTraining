@@ -54,7 +54,10 @@ export function ViewController() {
   };
 
   function AddParticipant(participantNome: string) {
-    if (participant.includes(participantNome)) {
+    const participantNomeRetificado = participantNome.toLowerCase();
+    const participantNomeRetificadoII = participantNome.toUpperCase();
+
+    if (participant.includes(participantNomeRetificado || participantNomeRetificadoII)) {
       return Dialog1();
     }
 
